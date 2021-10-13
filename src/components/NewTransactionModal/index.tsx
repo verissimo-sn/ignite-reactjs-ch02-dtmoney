@@ -12,8 +12,30 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
     <Modal 
         isOpen={isOpen} 
         onRequestClose={onRequestClose}
+        overlayClassName="react-model-overlay"
+        className="react-model-content"
       >
-        <h2>Cadastrar transação</h2>
+        <Container>
+          <h2>Cadastrar transação</h2>
+
+          <input 
+            placeholder="Titulo"
+          />
+
+          <input 
+            type="number"
+            placeholder="Valor"
+          />
+
+          <input 
+            placeholder="Categoria"
+          />
+
+          <button type="submit">
+            Cadastrar
+          </button>
+
+        </Container>
       </Modal>
   )
 }
