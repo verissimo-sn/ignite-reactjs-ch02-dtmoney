@@ -67,7 +67,6 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
             placeholder="Valor"
             value={value}
             onChange={event => setValue(+event.target.value)}
-
           />
 
           <TransactionTypeContainer>

@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { TransactinsContext } from '../../contexts/TransactionsContext';
 
 import { getAllTransactions, TransactionDataProps } from '../../services/api';
 
@@ -9,8 +11,11 @@ interface TransactionProps extends TransactionDataProps {
   createdAt: string;
 }
 
+
+
 export const TransactionsTable = () => {
   const [transactions, setTransactions] = useState<TransactionProps[]>([]);
+  const data = useContext(TransactinsContext);
 
   useEffect(() => {
     (async () => {
