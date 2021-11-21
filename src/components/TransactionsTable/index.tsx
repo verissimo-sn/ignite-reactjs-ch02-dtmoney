@@ -1,15 +1,27 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-import { api } from '../../services/api';
+import { getAllTransactions, TransactionDataProps } from '../../services/api';
 
 import { Container } from './styles';
 
+interface TransactionProps extends TransactionDataProps {
+  id: number
+  createdAt: string;
+}
+
 export const TransactionsTable = () => {
+  const [transactions, setTransactions] = useState<TransactionProps[]>([]);
 
   useEffect(() => {
-    api.get('/transactions')
-      .then(response => console.log(response.data));
-  }, [])
+    (async () => {
+      try {
+        const data: any = await getAllTransactions();
+        setTransactions(data.transactions);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
 
   return (
     <Container>
@@ -24,19 +36,15 @@ export const TransactionsTable = () => {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Desenvolviemnto de websites</td>
-            <td className="deposit">R$ 12.000</td>
-            <td>Desenvolviemnto</td>
-            <td>20/02/2021</td>
-          </tr>
-
-          <tr>
-            <td>Aluguel</td>
-            <td className="withdraw">- R$ 1.000</td>
-            <td>Desenvolviemnto</td>
-            <td>20/02/2021</td>
-          </tr>
+          {transactions.length && 
+            transactions.map((transaction) => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td className={transaction.type}>{transaction.amount}</td>
+              <td>{transaction.category}</td>
+              <td>{transaction.createdAt}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>

@@ -26,7 +26,7 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
     const newTransactionData = {
       type,
       title,
-      value,
+      amount: value,
       category
     }
 
