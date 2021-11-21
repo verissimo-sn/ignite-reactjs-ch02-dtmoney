@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
+import { createTransaction } from '../../services/api';
+
 import closeModalImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
@@ -18,8 +20,21 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
   const [value, setValue] = useState(0);
   const [category, setCategory] = useState('');
 
-  const handleCreateNewTransaction = (event: FormEvent) => {
+  const handleCreateNewTransaction = async (event: FormEvent) => {
     event.preventDefault();
+
+    const newTransactionData = {
+      type,
+      title,
+      value,
+      category
+    }
+
+    try { 
+      await createTransaction(newTransactionData);
+    } catch (err) {
+      console.log(err);
+    }
   }
   
   return (
