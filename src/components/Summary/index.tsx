@@ -9,7 +9,7 @@ import totalImg from '../../assets/total.svg';
 import { Container } from './styles';
 
 export const Summary= () => {
-  const data = useContext(TransactinsContext);
+  const transactions = useContext(TransactinsContext);
 
   return (
     <Container>
