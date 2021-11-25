@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { CreateTransactionDataProps } from '../interfaces/transactionsInterface'
+import { TransactionInput } from '../interfaces/transactionsInterface'
 
 export const api = axios.create({
   baseURL: 'http://localhost:3000/api',
@@ -12,9 +12,9 @@ export const getAllTransactions = async () => {
   return data;
 }
 
-export const createTransaction = async (createTransactionDataProps: CreateTransactionDataProps) => {
+export const createTransaction = async (transactionInput: TransactionInput) => {
   const { data } = await api.post('/transactions', {
-    ...createTransactionDataProps
+    ...transactionInput
   });
 
   return data;
