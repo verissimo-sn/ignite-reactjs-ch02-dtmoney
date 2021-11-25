@@ -1,32 +1,11 @@
-import { useState, useEffect, useContext } from 'react';
+import {  useContext } from 'react';
 
 import { TransactinsContext } from '../../contexts/TransactionsContext';
 
-import { getAllTransactions, TransactionDataProps } from '../../services/api';
-
 import { Container } from './styles';
 
-interface TransactionProps extends TransactionDataProps {
-  id: number
-  createdAt: string;
-}
-
-
-
 export const TransactionsTable = () => {
-  const [transactions, setTransactions] = useState<TransactionProps[]>([]);
-  const data = useContext(TransactinsContext);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data: any = await getAllTransactions();
-        setTransactions(data.transactions);
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, []);
+  const transactions = useContext(TransactinsContext);
 
   return (
     <Container>
