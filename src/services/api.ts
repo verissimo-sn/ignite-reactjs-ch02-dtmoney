@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-export interface TransactionDataProps {
-  title: string;
-  amount: number;
-  category: string;
-  type: string;
-}
+import { CreateTransactionDataProps } from '../interfaces/transactionsInterface'
 
 export const api = axios.create({
   baseURL: 'http://localhost:3000/api',
@@ -17,9 +12,9 @@ export const getAllTransactions = async () => {
   return data;
 }
 
-export const createTransaction = async (transactionData: TransactionDataProps) => {
+export const createTransaction = async (createTransactionDataProps: CreateTransactionDataProps) => {
   const { data } = await api.post('/transactions', {
-    ...transactionData
+    ...createTransactionDataProps
   });
 
   return data;
