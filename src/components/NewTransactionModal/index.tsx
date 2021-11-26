@@ -22,14 +22,24 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: NewTransactionMo
   const handleCreateNewTransaction = async (event: FormEvent) => {
     event.preventDefault();
 
-    const { status, error } = await createNewTransaction({
+    const { status } = await createNewTransaction({
       type,
       title,
       amount,
       category
     });
 
-    console.log({status, error})
+    if(status !== 201) {
+      console.log('error');
+      return;
+    }
+
+    setType('deposit');
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    
+    onRequestClose();
   }
   
   return (
