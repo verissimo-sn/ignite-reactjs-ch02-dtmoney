@@ -11,24 +11,23 @@ export const TransactionsProvider = ({ children }: ChildrenProps) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        const data: any = await getAllTransactions();
-        setTransactions(data.transactions);
-      } catch (err) {
-        console.log(err);
+      const { data, status } = await getAllTransactions();
+      setTransactions(data.transactions);
+
+      if(status !== 200) {
+        console.log('err -> getAllTransactions');
+        return;
       }
     })();
   }, []);
   
 
   const createNewTransaction = async (newTransactionData: TransactionInput) => {
-    try { 
-      await createTransaction(newTransactionData);
-      return { status: 'ok', error: null };
+    const { data, status } = await createTransaction(newTransactionData);
+    
+    setTransactions([...transactions, data.transaction]);
 
-    } catch (err) {
-      return { status: 'error', error: err as any}
-    }
+    return { status, data };
   }
 
   return (

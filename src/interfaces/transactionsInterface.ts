@@ -26,7 +26,6 @@ export interface TransactionsContextData {
 }
 
 interface ResponseStatus {
-  status: string;
-  error: any;
+  status: number;
   data?: Transaction;
 }
