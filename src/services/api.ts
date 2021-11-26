@@ -7,15 +7,15 @@ export const api = axios.create({
 });
 
 export const getAllTransactions = async () => {
-  const { data } = await api.get('/transactions');
-  
-  return data;
+  const response = await api.get('/transactions');
+
+  return { status: response.status, data: response.data as any}
 }
 
 export const createTransaction = async (transactionInput: TransactionInput) => {
-  const { data } = await api.post('/transactions', {
+  const response = await api.post('/transactions', {
     ...transactionInput
   });
 
-  return data;
+  return { status: response.status, data: response.data as any };
 }
